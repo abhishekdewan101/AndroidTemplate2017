@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="abhishekdewan.com.androidtemplate.features.testfeature.MainActivity">
+    tools:context="com.abhishek.androidtemplate.features.testfeature.MainActivity">
 
 </android.support.constraint.ConstraintLayout>

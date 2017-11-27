@@ -1,10 +1,9 @@
-package abhishekdewan.com.androidtemplate.features;
+package com.abhishek.androidtemplate.features;
 
 import android.support.v7.app.AppCompatActivity;
-
-import abhishekdewan.com.androidtemplate.di.components.ApplicationComponent;
-import abhishekdewan.com.androidtemplate.di.components.DaggerApplicationComponent;
-import abhishekdewan.com.androidtemplate.di.modules.ApplicationModule;
+import com.abhishek.androidtemplate.di.components.ApplicationComponent;
+import com.abhishek.androidtemplate.di.components.DaggerApplicationComponent;
+import com.abhishek.androidtemplate.di.modules.ApplicationModule;
 
 /**
  * Created by abhishekdewan on 11/26/17.

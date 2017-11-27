@@ -1,4 +1,4 @@
-package abhishekdewan.com.androidtemplate.di.scopes;
+package com.abhishek.androidtemplate.di.scopes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -11,5 +11,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PerApplication {
+public @interface PerActivity {
 }
