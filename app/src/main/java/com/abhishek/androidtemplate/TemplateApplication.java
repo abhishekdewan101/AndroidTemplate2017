@@ -32,4 +32,6 @@ public class TemplateApplication extends Application {
     private void initTimber() {
         Timber.plant(new Timber.DebugTree());
     }
+
+    public ApplicationComponent getComponent() { return mApplicationComponent;}
 }

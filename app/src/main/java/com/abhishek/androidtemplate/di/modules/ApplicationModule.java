@@ -7,6 +7,7 @@ import android.content.Context;
 import com.abhishek.androidtemplate.data.NotesRepository;
 import com.abhishek.androidtemplate.data.local.NoteDao;
 import com.abhishek.androidtemplate.data.local.NoteDatabase;
+import com.abhishek.androidtemplate.di.scopes.PerActivity;
 import com.abhishek.androidtemplate.di.scopes.PerApplication;
 import com.abhishek.androidtemplate.viewmodels.TestViewModel;
 
@@ -32,7 +33,7 @@ public class ApplicationModule {
 
     @Provides
     @PerApplication
-    Context getApplicationContext() {return mApplication.getApplicationContext();}
+    Application provideApplication() {return mApplication;}
 
     @Provides
     @Singleton
@@ -45,8 +46,4 @@ public class ApplicationModule {
     @Provides
     @PerApplication
     NoteDao provideNoteDao() {return this.mDatabase.noteDao();}
-
-    @Provides
-    @Singleton
-    TestViewModel provideTestViewModel(NotesRepository notesRepository) {return new TestViewModel(notesRepository);}
 }

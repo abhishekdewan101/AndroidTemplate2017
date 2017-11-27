@@ -1,9 +1,12 @@
 package com.abhishek.androidtemplate.features;
 
 import android.support.v7.app.AppCompatActivity;
+
+import com.abhishek.androidtemplate.TemplateApplication;
+import com.abhishek.androidtemplate.di.components.ActivityComponent;
 import com.abhishek.androidtemplate.di.components.ApplicationComponent;
-import com.abhishek.androidtemplate.di.components.DaggerApplicationComponent;
-import com.abhishek.androidtemplate.di.modules.ApplicationModule;
+import com.abhishek.androidtemplate.di.components.DaggerActivityComponent;
+import com.abhishek.androidtemplate.di.modules.ActivityModule;
 
 /**
  * Created by abhishekdewan on 11/26/17.
@@ -11,13 +14,14 @@ import com.abhishek.androidtemplate.di.modules.ApplicationModule;
 
 public class BaseActivity extends AppCompatActivity {
 
-    private ApplicationComponent mComponent;
+    private ActivityComponent mComponent;
 
-    public ApplicationComponent getComponent() {
+    public ActivityComponent getComponent() {
         if (mComponent == null) {
-            mComponent = DaggerApplicationComponent
+            mComponent = DaggerActivityComponent
                     .builder()
-                    .applicationModule(new ApplicationModule(this.getApplication()))
+                    .applicationComponent(((TemplateApplication)getApplication()).getComponent())
+                    .activityModule(new ActivityModule(this))
                     .build();
         }
 
