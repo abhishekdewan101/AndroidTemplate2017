@@ -1,14 +1,16 @@
 package com.abhishek.androidtemplate.data;
 
-import android.arch.lifecycle.LiveData;
+import android.app.Application;
 
+import com.abhishek.androidtemplate.TemplateApplication;
 import com.abhishek.androidtemplate.data.local.NoteDao;
 import com.abhishek.androidtemplate.data.model.Note;
+import com.abhishek.androidtemplate.data.remote.NoteRemoteDatabase;
 
-import java.util.List;
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * Created by abhishekdewan on 11/26/17.
@@ -16,21 +18,22 @@ import io.reactivex.schedulers.Schedulers;
 
 public class NotesRepository {
 
+    @Inject
     public NoteDao mNoteDao;
 
-    public NotesRepository(NoteDao noteDao){
-        mNoteDao = noteDao;
+    @Inject
+    public NoteRemoteDatabase mNoteRemoteDatabase;
+
+    public NotesRepository(Application application) {
+        ((TemplateApplication)application).getComponent().inject(this);
     }
 
-    public LiveData<List<Note>> getAllNotes() {
-        return mNoteDao.getAllNotes();
+    public PublishSubject<Note> getAllNotes() {
+        return mNoteRemoteDatabase.getAllNotes();
     }
 
-    public void addNote(Note note) {
-        Observable.just(note)
-                .subscribeOn(Schedulers.io())
-                .subscribe(note1 -> {mNoteDao.insertNote(note);},
-                        throwable -> {throwable.printStackTrace();});
+    public Observable<Boolean> addNote(Note note){
+        return mNoteRemoteDatabase.addNote(note);
     }
 
 }

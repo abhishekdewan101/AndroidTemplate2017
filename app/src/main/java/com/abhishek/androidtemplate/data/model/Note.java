@@ -3,6 +3,8 @@ package com.abhishek.androidtemplate.data.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 
 /**
  * Created by abhishekdewan on 11/26/17.
@@ -14,9 +16,13 @@ public class Note {
 
     @PrimaryKey(autoGenerate = true)
     private int mId;
+    @SerializedName("title")
     private String mTitle;
+    @SerializedName("details")
     private String mDetails;
+    @SerializedName("created")
     private String mCreatedAt;
+    @SerializedName("color")
     private int mColor;
 
     public Note(String title, String details, String createdAt, int color) {
@@ -68,5 +74,10 @@ public class Note {
 
     enum NOTE_COLORS{
         RED,GREEN,BLUE,PURPLE,ORANGE,YELLOW
+    }
+
+    @Override
+    public String toString(){
+        return String.format("Title:%s,Body:%s,Created:%s,Color:%s",mTitle,mDetails,mCreatedAt,NOTE_COLORS.values()[mColor]);
     }
 }

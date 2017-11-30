@@ -9,6 +9,9 @@ import com.abhishek.androidtemplate.data.model.Note;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+
 
 /**
  * Created by abhishekdewan on 11/26/17.
@@ -18,7 +21,7 @@ import java.util.List;
 public interface NoteDao {
 
     @Query("SELECT * from notes")
-    LiveData<List<Note>> getAllNotes();
+    Flowable<List<Note>> getAllNotes();
 
     @Insert
     void insertNote(Note note);

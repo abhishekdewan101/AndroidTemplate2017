@@ -2,14 +2,12 @@ package com.abhishek.androidtemplate.di.modules;
 
 import android.app.Application;
 import android.arch.persistence.room.Room;
-import android.content.Context;
 
 import com.abhishek.androidtemplate.data.NotesRepository;
 import com.abhishek.androidtemplate.data.local.NoteDao;
 import com.abhishek.androidtemplate.data.local.NoteDatabase;
-import com.abhishek.androidtemplate.di.scopes.PerActivity;
+import com.abhishek.androidtemplate.data.remote.NoteRemoteDatabase;
 import com.abhishek.androidtemplate.di.scopes.PerApplication;
-import com.abhishek.androidtemplate.viewmodels.TestViewModel;
 
 import javax.inject.Singleton;
 
@@ -37,7 +35,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    NotesRepository provideNotesRepository(NoteDao noteDao) {return new NotesRepository(noteDao);}
+    NotesRepository provideNotesRepository() {return new NotesRepository(mApplication);}
 
     @Provides
     @PerApplication
@@ -46,4 +44,8 @@ public class ApplicationModule {
     @Provides
     @PerApplication
     NoteDao provideNoteDao() {return this.mDatabase.noteDao();}
+
+    @Provides
+    @Singleton
+    NoteRemoteDatabase provideNoteRemoteDatabase() {return new NoteRemoteDatabase();}
 }
